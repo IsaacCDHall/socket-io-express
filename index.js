@@ -18,8 +18,9 @@ app.use(express.static(path.join(__dirname, "client/build")));
 require("./routes/tweets.js")(app, io);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "../client/build/index.html"));
+  res.render(path.join(__dirname + "/client/build/index.html"));
 });
+console.log(app.get("/",(req, res) => { return res }));
 const port = process.env.PORT || 3001;
 server.listen(port);
 console.log(`Password generator listening on ${port}`);
