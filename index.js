@@ -4,26 +4,28 @@ const socketio = require("socket.io");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
-require("dotenv").config({ path: ".env" });
+require("dotenv").config({ path: "./.env" });
 
 const server = http.createServer(app);
 const io = socketio(server);
+// const cors = require("cors");
 
 //this may double parse things
-// app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(bodyParser.json());
+// app.use(express.static(path.join(__dirname, "client/build")));
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 require("./routes/tweets.js")(app, io);
 
+// app.use(cors());
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 const port = process.env.PORT || 3001;
-app.listen(port);
+// app.listen(port);
 
 console.log(`Password generator listening on ${port}`);
 
-// server.listen(port, () => {
-//   console.log("server is up");
-// });
+server.listen(port, () => {
+  console.log("server is up");
+});
 // establish socket io connection
