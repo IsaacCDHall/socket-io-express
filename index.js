@@ -8,13 +8,13 @@ require("dotenv").config({ path: "./.env" });
 
 const server = http.createServer(app);
 const io = socketio(server);
-const cors = require("cors");
-app.use(cors());
+// const cors = require("cors");
+// app.use(cors());
 
 //this may double parse things
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/build")));
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 require("./routes/tweets.js")(app, io);
 
 app.get("*", (req, res) => {

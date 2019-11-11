@@ -47,7 +47,7 @@ class TweetList extends React.Component {
   }
 
   componentDidMount() {
-    const socket = socketIOClient("http://localhost:3000/");
+    const socket = socketIOClient("http://localhost:3001/");
 
     socket.on("connect", () => {
       console.log("Socket Connected");
