@@ -12,7 +12,7 @@ const cors = require("cors");
 app.use(cors());
 
 //this may double parse things
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/build")));
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 require("./routes/tweets.js")(app, io);
