@@ -8,8 +8,8 @@ require("dotenv").config({ path: "./.env" });
 
 const server = http.createServer(app);
 const io = socketio(server);
-// const cors = require("cors");
-// app.use(cors());
+const cors = require("cors");
+app.use(cors());
 
 //this may double parse things
 app.use(bodyParser.json());
@@ -21,10 +21,10 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 const port = process.env.PORT || 3001;
-// app.listen(port);
+server.listen(port);
 console.log(`Password generator listening on ${port}`);
 
-server.listen(port, () => {
-  console.log("server is up");
-});
+// server.listen(port, () => {
+//   console.log("server is up");
+// });
 // establish socket io connection
