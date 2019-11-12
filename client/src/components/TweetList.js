@@ -20,9 +20,7 @@ class TweetList extends React.Component {
 
   handleKeyPress(event) {
     if (event.key === "Enter") {
-      this.handleResume();
-      console.log("hit enter");
-    }
+      this.handleResume();}
   }
 
   handleResume() {
@@ -53,7 +51,7 @@ class TweetList extends React.Component {
       console.log("Socket Connected");
       socket.on("tweets", data => {
         
-        let newList = [data].concat(this.state.items.slice(0, 15));
+        let newList = [data].concat(this.state.items.slice(0, 8));
         this.setState({ items: newList });
       });
     });
@@ -80,35 +78,36 @@ class TweetList extends React.Component {
     let searchControls = (
       <div>
         <input
-          id="email"
           type="text"
-          className="validate"
+          className="validate search-input"
           value={this.state.searchTerm}
           onKeyPress={this.handleKeyPress}
           onChange={this.handleChange}
         />
-        <label htmlFor="email">Search</label>
+        <label className="deep-purple-text text-accent-1 left-align" >Search</label>
       </div>
     );
 
     let filterControls = (
       <div>
         <a
-          className="btn-floating btn-small waves-effect waves-light pink accent-2"
+          className="btn-floating btn-small purple accent-1 control-button"
           style={controlStyle}
           onClick={this.handleResume}
         >
           <i className="material-icons">play_arrow</i>
         </a>
         <a
-          className="btn-floating btn-small waves-effect waves-light pink accent-2"
+          className="btn-floating btn-small purple accent-3 control-button"
           onClick={this.handlePause}
         >
           <i className="material-icons">pause</i>
         </a>
         <p>
-          <input type="checkbox" id="test5" />
-          <label htmlFor="test5">Retweets</label>
+          <input className="pink" type="checkbox" id="test5" />
+          <label className="deep-purple-text text-accent-1" htmlFor="test5">
+            Retweets
+          </label>
         </p>
       </div>
     );
@@ -116,26 +115,26 @@ class TweetList extends React.Component {
     let controls = <div>{items.length > 0 ? filterControls : null}</div>;
 
     let loading = (
-      <div>
-        <p className="flow-text">Listening to Streams</p>
-        <div className="progress lime lighten-3">
-          <div className="indeterminate pink accent-1"></div>
+      <div className="valign-wrapper container loading">
+        <p className="flow-text black-text">Finding Tweets</p>
+        <div className="progress blue accent-1">
+          <div className="indeterminate purple accent-1"></div>
         </div>
       </div>
     );
 
     return (
       <div className="row">
-        <div className="col s12 m4 l4">
-          <div className="input-field col s12">
+        <div className="col s12 m4">
+          <div className="input-field col s11 center-align">
             {searchControls}
             {items.length > 0 ? controls : null}
           </div>
         </div>
-        <div className="col s12 m4 l4">
+        <div className="col s12 m4">
           <div>{items.length > 0 ? itemsCards : loading}</div>
         </div>
-        <div className="col s12 m4 l4"></div>
+        <div className="col s12 m4"></div>
       </div>
     );
   }
