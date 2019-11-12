@@ -28,7 +28,7 @@ app.get("*", (req, res) => {
 // res.sendFile(index)
 // )
 // .listen(port, () => console.log(`Listening on ${port}`));
-const io = socketIO(server);
+// const io = socketIO(server);
 require("./routes/tweets.js")(app, io);
 
 // server.listen(port, () => {
