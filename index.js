@@ -31,9 +31,9 @@ app.get("*", (req, res) => {
 // const io = socketIO(server);
 require("./routes/tweets.js")(app, io);
 
-// server.listen(port, () => {
-//   console.log("server is up on " + port);
-// });
+server.listen(port, () => {
+  console.log("server is up on " + port);
+});
 
 
 
