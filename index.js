@@ -8,8 +8,8 @@ require("dotenv").config({ path: "./.env" });
 const port = process.env.PORT || 3001;
 const index = path.join(__dirname + "/client/build/index.html");
 
-// const server = http.createServer(app);
-// const io = socketIO(server);
+const server = http.createServer(app);
+const io = socketIO(server);
 // const cors = require("cors");
 // app.use(cors());
 
@@ -23,11 +23,11 @@ app.get("*", (req, res) => {
   res.sendFile(index);
 });
 // console.log(app.get("/",(req, res) => { return res }));
-const server = express()
-.use((req, res) =>
-res.sendFile(index)
-)
-.listen(port, () => console.log(`Listening on ${port}`));
+// const server = express()
+// .use((req, res) =>
+// res.sendFile(index)
+// )
+// .listen(port, () => console.log(`Listening on ${port}`));
 const io = socketIO(server);
 require("./routes/tweets.js")(app, io);
 
